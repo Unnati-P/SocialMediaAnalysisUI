@@ -1,0 +1,91 @@
+// This is the top-level scss file. Import all other files in here.
+@import 'home';
+
+html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  height: 100%;
+}
+
+.app {
+  height: 100%;
+}
+
+.header {
+  font-size: 18px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 57px;
+  display: block;
+  line-height: 60px;
+  text-align: center;
+  background: #1c262f;
+  border-bottom: 1px solid #1c262f;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.sidebar {
+  background: #2e3d49;
+  overflow-y: auto;
+  width: 25%;
+}
+
+.sidebar__item {
+  border-bottom: 1px solid black;
+  line-height: 35px;
+  height: 35px;
+  color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 10px 40px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.plotArea {
+  width: 75%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.active {
+  color: white;
+}
+
+.heading {
+  padding-bottom: 20px;
+}
+
+.loaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
