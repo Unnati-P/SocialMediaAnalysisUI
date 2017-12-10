@@ -63,6 +63,14 @@ class Plotarea extends React.Component {
         const that = this;
 
         if (that.props.activeGraph !== nextProps.activeGraph) {
+            if (nextProps.activeGraph === 0) {
+                that.setState({loading: true});
+                axios.get('http://127.0.0.1:3045/getpollutionretweets')
+                    .then(function (res) {
+                        that.setState({loading: false});
+                        that.setState({pieChartData: res.data})
+                    });
+            }
             if (nextProps.activeGraph === 1) {
                 that.setState({loading: true});
                 axios.get('http://127.0.0.1:3045/getockhiretweets')
