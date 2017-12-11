@@ -148,7 +148,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 0) {
             that.setState({loading: true});
-            axios.get('http://127.0.0.1:5000/getpollutionretweets')
+            axios.get('http://localhost:5000/getpollutionretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -157,7 +157,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 1) {
             that.setState({loading: true});
-            axios.get('http://127.0.0.1:5000/getockhiretweets')
+            axios.get('http://localhost:5000/getockhiretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -171,7 +171,7 @@ class Plotarea extends React.Component {
         if (that.props.activeGraph !== nextProps.activeGraph) {
             if (nextProps.activeGraph === 0) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getpollutionretweets')
+                axios.get('http://localhost:5000/getpollutionretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -179,7 +179,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 1) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getockhiretweets')
+                axios.get('http://localhost:5000/getockhiretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -187,7 +187,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 2) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getpollutiontweetslocations')
+                axios.get('http://localhost:5000/getpollutiontweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsLocationData: res.data.results})
@@ -195,7 +195,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 3) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getpollutiontweetsfavorites')
+                axios.get('http://localhost:5000/getpollutiontweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsFavoritesData: res.data.results})
@@ -203,7 +203,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 4) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getpollutiontweetsmedia')
+                axios.get('http://localhost:5000/getpollutiontweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsMediaData: res.data.results})
@@ -211,7 +211,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 5) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getockhitweetslocations')
+                axios.get('http://localhost:5000/getockhitweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsLocationData: res.data.results})
@@ -219,7 +219,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 6) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getockhitweetsfavorites')
+                axios.get('http://localhost:5000/getockhitweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsFavoritesData: res.data.results})
@@ -227,7 +227,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 7) {
                 that.setState({loading: true});
-                axios.get('http://127.0.0.1:5000/getockhitweetsmedia')
+                axios.get('http://localhost:5000/getockhitweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsMediaData: res.data.results})
