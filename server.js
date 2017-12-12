@@ -1,14 +1,18 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const express = require('express');
+const app = express();
+const path = require('path');
+const morgan = require('morgan')
 
-new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath
-  })
-  .listen(3000, '0.0.0.0', function (err, result) {
-    if (err) {
-      console.log(err);
-    }
+const PORT = process.env.PORT;
 
-    console.log('Running at http://0.0.0.0:3000');
-  });
+app.use(morgan('tiny'));
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/src/index.html'));
+});
+
+
+app.listen(PORT || 5000, function () {
+    console.log('Tasks app listening on port 3000!')
+});
