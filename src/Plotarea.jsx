@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {Pie, HorizontalBar, Bar, Doughnut} from 'react-chartjs-2';
+import { Component } from 'react';
+import { Graph } from 'react-d3-graph';
 import axios from 'axios';
 
 const getRetweetChartData = data => {
@@ -126,6 +128,24 @@ const getPollutionTweetsMediaData = data => {
     };
 };
 
+const getOckhiTweetsMentionsData = data => {
+
+  const myConfig = {
+    nodeHighlightBehavior: true,
+    node: {
+      color: 'lightgreen',
+      size: 120,
+      highlightStrokeColor: 'blue'
+    },
+    link: {
+      highlightColor: 'lightblue'
+    }
+  };
+
+  return myConfig;
+
+};
+
 
 class Plotarea extends React.Component {
     constructor(props) {
@@ -137,6 +157,7 @@ class Plotarea extends React.Component {
             pollutionTweetsLocationData: {},
             pollutionTweetsFavoritesData: {},
             pollutionTweetsMediaData: {},
+            ockhiTweetsMentions: {},
             ockhiTweetsLocationData: {},
             ockhiTweetsFavoritesData: {},
             ockhiTweetsMediaData: {},
@@ -231,6 +252,14 @@ class Plotarea extends React.Component {
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsMediaData: res.data.results})
+                    });
+            }
+            if (nextProps.activeGraph === 8) {
+                that.setState({loading: true});
+                axios.get('http://localhost:5000/getmentionslinks')
+                    .then(function (res) {
+                        that.setState({loading: false});
+                        that.setState({ockhiTweetsMentions: res.data})
                     });
             }
         }
@@ -363,6 +392,23 @@ class Plotarea extends React.Component {
                     <div>
                         <Doughnut
                             data={getPollutionTweetsMediaData(this.state.ockhiTweetsMediaData)}
+                        />
+                    </div>
+                </div>
+            );
+        }else if (that.props.activeGraph === 8) {
+            return (
+                <div className="plotArea">
+                    <div
+                        className="heading"
+                    >
+                        {'Network graph of mentions in Tweets'}
+                    </div>
+                    <div>
+                        <Graph
+                             id='graph-id'
+                            data={this.state.ockhiTweetsMentions}
+                            config={getOckhiTweetsMentionsData(this.state.ockhiTweetsMentions)}
                         />
                     </div>
                 </div>

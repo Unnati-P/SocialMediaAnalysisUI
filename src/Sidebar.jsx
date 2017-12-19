@@ -57,6 +57,7 @@ class Sidebar extends React.Component {
                             >
                                 {'Pollution tweets with image and texts'}
                             </div>
+
                         </div>
                     )}
                 </div>
@@ -88,6 +89,12 @@ class Sidebar extends React.Component {
                                 onClick={_.partial(that.onClick.bind(that), 7)}
                             >
                                 {'Pollution tweets with image and texts'}
+                            </div>
+                            <div
+                                className={classnames('sidebar__item', {active: this.props.activeGraph === 8})}
+                                onClick={_.partial(that.onClick.bind(that), 8)}
+                            >
+                                {'Ockhi Tweets Mentions Network'}
                             </div>
                         </div>
                     )}
