@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
-import Sidebar from './Sidebar.jsx';
-import Plotarea from './Plotarea.jsx';
+import PropTypes from 'prop-types';
+import Sidebar from './Sidebar.js';
+import Plotarea from './Plotarea.js';
+
+import styles from './styles.scss'
 
 class App extends Component {
+
     constructor(props) {
         super(props);
-
+        styles._insertCss();
         this.state = {
             activeGraph: 0,
         };

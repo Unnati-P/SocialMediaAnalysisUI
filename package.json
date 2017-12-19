@@ -1,55 +1,49 @@
 {
-  "name": "react-simple-boilerplate",
+  "name": "tasks-frontend",
   "version": "1.0.0",
-  "description": "Simple and lightweight Boilerplate for ReactJS projects",
+  "description": "",
+  "main": "electron.js",
   "scripts": {
-    "lint": "eslint src",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-build": "webpack -w --config webpack.config.dev.js --display-error-details --color",
+    "prod-build": "webpack --config webpack.config.prod.js --display-error-details --color",
+    "start": "npm run prod-build && node server.js",
+    "electron": "electron ."
   },
-  "repository": "https://github.com/noahlotzer/react-simple-boilerplate.git",
-  "keywords": [
-    "react",
-    "reactjs",
-    "boilerplate",
-    "reload",
-    "live",
-    "edit",
-    "webpack"
-  ],
-  "author": "Noah-Jerome Lotzer <noah.lotzer@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/noahlotzer/react-simple-boilerplate/issues"
+  "repository": {
+    "type": "git"
   },
-  "homepage": "https://github.com/noahlotzer/react-simple-boilerplate",
-  "devDependencies": {
+  "keywords": [],
+  "author": "Aditya Raval",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^8.0.3",
     "babel-loader": "^7.0.0",
+    "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.7.1",
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.0",
-    "eslint": "^3.19.0",
-    "eslint-plugin-react": "^6.10.3",
+    "express": "^4.15.4",
+    "isomorphic-style-loader": "^4.0.0",
+    "lodash": "^4.17.4",
+    "morgan": "^1.9.0",
     "node-sass": "^4.5.2",
+    "postcss-loader": "^2.0.9",
+    "postcss-scss": "^1.0.2",
+    "prop-types": "^15.6.0",
+    "react": "^15.6.1",
+    "react-chartjs-2": "^2.6.4",
+    "react-dom": "^15.6.1",
+    "recompose": "^0.25.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.4"
-  },
-  "dependencies": {
-    "axios": "^0.17.1",
-    "babel-loader": "^7.0.0",
-    "chart.js": "^2.7.1",
-    "chartjs": "^0.3.24",
-    "classnames": "^2.2.5",
-    "highcharts": "^6.0.3",
-    "lodash": "^4.17.4",
-    "react": "^15.6.2",
-    "react-chartjs": "^0.8.0",
-    "react-chartjs-2": "^2.6.4",
-    "react-dom": "^15.5.4",
-    "react-highcharts": "^15.0.0"
-  },
-  "main": "server.js"
+    "webpack": "^2.4.1"
+  }
 }
