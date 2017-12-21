@@ -12,6 +12,6 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/src/index.html'));
 });
 
-app.listen(PORT || 5000, function () {
+app.listen(PORT || 3000, function () {
     console.log('Tasks app listening on port 3000!')
 });

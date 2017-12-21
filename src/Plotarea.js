@@ -2,6 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {Pie, HorizontalBar, Bar, Doughnut} from 'react-chartjs-2';
+import { Component } from 'react';
+import { Graph } from 'react-d3-graph';
+import * as d3 from "d3";
+import {forceSimulation,  forceLink,  forceManyBody,  forceCenter} from 'd3-force';
+import {  XYPlot,  MarkSeriesCanvas,  LineSeriesCanvas} from 'index';
 import axios from 'axios';
 
 const getRetweetChartData = data => {
@@ -126,6 +131,25 @@ const getPollutionTweetsMediaData = data => {
     };
 };
 
+const getPollutionTweetsMentionsData = () => {
+
+  const myConfig = {
+    nodeHighlightBehavior: true,
+    node: {
+      color: 'lightgreen',
+      size: 120,
+      highlightStrokeColor: 'blue'
+    },
+    link: {
+      highlightColor: 'lightblue'
+    }
+  };
+
+  return myConfig;
+
+};
+
+
 
 class Plotarea extends React.Component {
     constructor(props) {
@@ -137,9 +161,13 @@ class Plotarea extends React.Component {
             pollutionTweetsLocationData: {},
             pollutionTweetsFavoritesData: {},
             pollutionTweetsMediaData: {},
+            pollutionTweetsReplyData: {},
+            pollutionTweetsMentionsData: {},
+            ockhiTweetsMentionsData: {},
             ockhiTweetsLocationData: {},
             ockhiTweetsFavoritesData: {},
             ockhiTweetsMediaData: {},
+            ockhiTweetsReplyData: {}
         };
     }
 
@@ -148,7 +176,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 0) {
             that.setState({loading: true});
-            axios.get('https://social-media-analysis-api.herokuapp.com/getpollutionretweets')
+            axios.get('http://localhost:5000/getpollutionretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -157,7 +185,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 1) {
             that.setState({loading: true});
-            axios.get('https://social-media-analysis-api.herokuapp.com/getockhiretweets')
+            axios.get('http://localhost:5000/getockhiretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -165,13 +193,15 @@ class Plotarea extends React.Component {
         }
     }
 
+
+
     componentWillReceiveProps(nextProps) {
         const that = this;
 
         if (that.props.activeGraph !== nextProps.activeGraph) {
             if (nextProps.activeGraph === 0) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutionretweets')
+                axios.get('http://localhost:5000/getpollutionretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -179,7 +209,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 1) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getockhiretweets')
+                axios.get('http://localhost:5000/getockhiretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -187,7 +217,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 2) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetslocations')
+                axios.get('http://localhost:5000/getpollutiontweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsLocationData: res.data.results})
@@ -195,7 +225,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 3) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetsfavorites')
+                axios.get('http://localhost:5000/getpollutiontweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsFavoritesData: res.data.results})
@@ -203,7 +233,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 4) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetsmedia')
+                axios.get('http://localhost:5000/getpollutiontweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsMediaData: res.data.results})
@@ -211,7 +241,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 5) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetslocations')
+                axios.get('http://localhost:5000/getockhitweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsLocationData: res.data.results})
@@ -219,7 +249,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 6) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetsfavorites')
+                axios.get('http://localhost:5000/getockhitweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsFavoritesData: res.data.results})
@@ -227,10 +257,38 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 7) {
                 that.setState({loading: true});
-                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetsmedia')
+                axios.get('http://localhost:5000/getockhitweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsMediaData: res.data.results})
+                    });
+            }
+            if (nextProps.activeGraph === 8) {
+                that.setState({loading: true});
+                axios.get('http://localhost:5000/getmentionslinkspollution')
+                    .then(function (res) {
+                        that.setState({pollutionTweetsMentionsData: res.data , loading: false});
+                    });
+            }
+            if (nextProps.activeGraph === 9) {
+                that.setState({loading: true});
+                axios.get('http://localhost:5000/getmentionslinksockhi')
+                    .then(function (res) {
+                        that.setState({ockhiTweetsMentionsData: res.data , loading: false});
+                    });
+            }
+            if (nextProps.activeGraph === 10) {
+                that.setState({loading: true});
+                axios.get('http://localhost:5000/getreplypollution')
+                    .then(function (res) {
+                        that.setState({pollutionTweetsReplyData: res.data , loading: false});
+                    });
+            }
+            if (nextProps.activeGraph === 11) {
+                that.setState({loading: true});
+                axios.get('http://localhost:5000/getreplyockhi')
+                    .then(function (res) {
+                        that.setState({ockhiTweetsReplyData: res.data , loading: false});
                     });
             }
         }
@@ -367,7 +425,75 @@ class Plotarea extends React.Component {
                     </div>
                 </div>
             );
-        }else {
+        } else if (that.props.activeGraph === 8) {
+            return (
+                <div className="plotArea">
+                    <div
+                        className="heading"
+                    >
+                        {'Network graph of mentions in Tweets (You may zoom, select and move nodes)'}
+                    </div>
+                    <div className="netgraph">
+                        <Graph
+                             id='graph-id'
+                            data={this.state.pollutionTweetsMentionsData}
+                            config={getPollutionTweetsMentionsData()}
+                        />
+                    </div>
+                </div>
+            );
+        } else if (that.props.activeGraph === 9) {
+            return (
+                <div className="plotArea">
+                    <div
+                        className="heading"
+                    >
+                        {'Network graph of mentions in Tweets (You may zoom, select and move nodes)'}
+                    </div>
+                    <div className="netgraph">
+                        <Graph
+                             id='graph-id1'
+                            data={this.state.ockhiTweetsMentionsData}
+                            config={getPollutionTweetsMentionsData()}
+                        />
+                    </div>
+                </div>
+            );
+        } else if (that.props.activeGraph === 10) {
+            return (
+                <div className="plotArea">
+                    <div
+                        className="heading"
+                    >
+                        {'Network graph of replies of Tweets (You may zoom, select and move nodes)'}
+                    </div>
+                    <div className="netgraph">
+                        <Graph
+                             id='graph-id2'
+                            data={this.state.pollutionTweetsReplyData}
+                            config={getPollutionTweetsMentionsData()}
+                        />
+                    </div>
+                </div>
+            );
+        } else if (that.props.activeGraph === 11) {
+            return (
+                <div className="plotArea">
+                    <div
+                        className="heading"
+                    >
+                        {'Network graph of replies Tweets (You may zoom, select and move nodes)'}
+                    </div>
+                    <div className="netgraph">
+                        <Graph
+                             id='graph-id3'
+                            data={this.state.ockhiTweetsReplyData}
+                            config={getPollutionTweetsMentionsData()}
+                        />
+                    </div>
+                </div>
+            );
+        } else {
             return <div>{'Could not load graph'}</div>
         }
     }

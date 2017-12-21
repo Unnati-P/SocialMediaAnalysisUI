@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
@@ -9,7 +8,7 @@ class Sidebar extends React.Component {
         super(props);
         this.state = {
             showPollution: true,
-            showOckhi: true,
+            showOckhi: false,
         };
     }
 
@@ -58,6 +57,18 @@ class Sidebar extends React.Component {
                             >
                                 {'Pollution tweets with image and texts'}
                             </div>
+                            <div
+                                className={classnames('sidebar__item', {active: this.props.activeGraph === 8})}
+                                onClick={_.partial(that.onClick.bind(that), 8)}
+                            >
+                                {'Pollution tweets mentions network'}
+                            </div>
+                            <div
+                                className={classnames('sidebar__item', {active: this.props.activeGraph === 10})}
+                                onClick={_.partial(that.onClick.bind(that), 10)}
+                            >
+                                {'Pollution tweets reply network'}
+                            </div>
                         </div>
                     )}
                 </div>
@@ -76,7 +87,7 @@ class Sidebar extends React.Component {
                                 className={classnames('sidebar__item', {active: this.props.activeGraph === 5})}
                                 onClick={_.partial(that.onClick.bind(that), 5)}
                             >
-                                {'Ockhi storm tweets Users/Location Chart'}
+                                {'Ockhi tweets Users/Location Chart'}
                             </div>
                             <div
                                 className={classnames('sidebar__item', {active: this.props.activeGraph === 6})}
@@ -88,7 +99,19 @@ class Sidebar extends React.Component {
                                 className={classnames('sidebar__item', {active: this.props.activeGraph === 7})}
                                 onClick={_.partial(that.onClick.bind(that), 7)}
                             >
-                                {'Pollution tweets with image and texts'}
+                                {'Ockhi tweets with image and texts'}
+                            </div>
+                            <div
+                                className={classnames('sidebar__item', {active: this.props.activeGraph === 9})}
+                                onClick={_.partial(that.onClick.bind(that), 9)}
+                            >
+                                {'Ockhi Tweets Mentions Network'}
+                            </div>
+                            <div
+                                className={classnames('sidebar__item', {active: this.props.activeGraph === 11})}
+                                onClick={_.partial(that.onClick.bind(that), 11)}
+                            >
+                                {'Ockhi Tweets Reply Network'}
                             </div>
                         </div>
                     )}
