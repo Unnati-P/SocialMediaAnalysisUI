@@ -176,7 +176,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 0) {
             that.setState({loading: true});
-            axios.get('http://localhost:5000/getpollutionretweets')
+            axios.get('https://social-media-analysis-api.herokuapp.com/getpollutionretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -185,7 +185,7 @@ class Plotarea extends React.Component {
 
         if (that.props.activeGraph === 1) {
             that.setState({loading: true});
-            axios.get('http://localhost:5000/getockhiretweets')
+            axios.get('https://social-media-analysis-api.herokuapp.com/getockhiretweets')
                 .then(function (res) {
                     that.setState({loading: false});
                     that.setState({pieChartData: res.data})
@@ -201,7 +201,7 @@ class Plotarea extends React.Component {
         if (that.props.activeGraph !== nextProps.activeGraph) {
             if (nextProps.activeGraph === 0) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getpollutionretweets')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutionretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -209,7 +209,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 1) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getockhiretweets')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getockhiretweets')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pieChartData: res.data})
@@ -217,7 +217,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 2) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getpollutiontweetslocations')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsLocationData: res.data.results})
@@ -225,7 +225,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 3) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getpollutiontweetsfavorites')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsFavoritesData: res.data.results})
@@ -233,7 +233,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 4) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getpollutiontweetsmedia')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getpollutiontweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({pollutionTweetsMediaData: res.data.results})
@@ -241,7 +241,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 5) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getockhitweetslocations')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetslocations')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsLocationData: res.data.results})
@@ -249,7 +249,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 6) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getockhitweetsfavorites')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetsfavorites')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsFavoritesData: res.data.results})
@@ -257,7 +257,7 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 7) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getockhitweetsmedia')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getockhitweetsmedia')
                     .then(function (res) {
                         that.setState({loading: false});
                         that.setState({ockhiTweetsMediaData: res.data.results})
@@ -265,28 +265,28 @@ class Plotarea extends React.Component {
             }
             if (nextProps.activeGraph === 8) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getmentionslinkspollution')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getmentionslinkspollution')
                     .then(function (res) {
                         that.setState({pollutionTweetsMentionsData: res.data , loading: false});
                     });
             }
             if (nextProps.activeGraph === 9) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getmentionslinksockhi')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getmentionslinksockhi')
                     .then(function (res) {
                         that.setState({ockhiTweetsMentionsData: res.data , loading: false});
                     });
             }
             if (nextProps.activeGraph === 10) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getreplypollution')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getreplypollution')
                     .then(function (res) {
                         that.setState({pollutionTweetsReplyData: res.data , loading: false});
                     });
             }
             if (nextProps.activeGraph === 11) {
                 that.setState({loading: true});
-                axios.get('http://localhost:5000/getreplyockhi')
+                axios.get('https://social-media-analysis-api.herokuapp.com/getreplyockhi')
                     .then(function (res) {
                         that.setState({ockhiTweetsReplyData: res.data , loading: false});
                     });
@@ -465,7 +465,7 @@ class Plotarea extends React.Component {
                     <div
                         className="heading"
                     >
-                        {'Network graph of replies of Tweets (You may zoom, select and move nodes)'}
+                        {'Network graph of replies of Tweets '}
                     </div>
                     <div className="netgraph">
                         <Graph
@@ -482,7 +482,7 @@ class Plotarea extends React.Component {
                     <div
                         className="heading"
                     >
-                        {'Network graph of replies Tweets (You may zoom, select and move nodes)'}
+                        {'Network graph of replies Tweets'}
                     </div>
                     <div className="netgraph">
                         <Graph
